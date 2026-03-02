@@ -1,0 +1,74 @@
+inference:
+  img_size: 640
+  obj_thresh: 0.25
+  nms_thresh: 0.45
+  num_threads: 3
+  model_path: /models/active.rknn
+  fallback_model_path: /models/fallback.rknn
+  class_names_path: /models/classes.txt
+
+collection:
+  conf_low_threshold: 0.30
+  conf_high_threshold: 0.70
+  collection_rate_limit_sec: 5
+  max_buffer_size: 500
+  buffer_dir: /data/buffer
+  jpeg_quality: 85
+
+screening:
+  iou_threshold: 0.50
+  base_model_path: /models/base.pt
+  base_rknn_path: /models/base.rknn
+  min_valid_samples: 20
+  screening_batch_size: 16
+  reference_dir: /data/reference
+  reference_split: 0.70
+  novel_similarity_thresh: 0.35
+
+training:
+  lora_rank: 8
+  lora_alpha: 16
+  lora_dropout: 0.05
+  target_layers: ["neck", "head"]
+  learning_rate: 1.0e-4
+  batch_size: 4
+  max_epochs: 10
+  gradient_accumulation: 4
+  max_train_images: 200
+  replay_ratio: 0.30
+  timeout_sec: 180
+  gradient_checkpointing: true
+
+evaluation:
+  min_overall_accuracy: 0.92
+  max_false_positive_rate: 0.03
+  max_variant_accuracy_drop: 0.02
+  min_map50: 0.70
+  max_latency_p95_ms: 100
+  max_latency_p99_ms: 200
+  test_split_key: "test"
+
+deployment:
+  models_dir: /models
+  active_model: /models/active.rknn
+  standby_model: /models/standby.rknn
+  previous_model: /models/previous.rknn
+  base_rknn: /models/base.rknn
+  warmup_frames: 10
+  post_swap_monitor_frames: 100
+  anomaly_confidence_floor: 0.01
+
+storage:
+  total_budget_gb: 10
+  reserved_gb: 1.0
+  buffer_dir: /data/buffer
+  reference_dir: /data/reference
+  training_cache_dir: /data/training_cache
+  logs_dir: /data/logs
+  models_dir: /models
+
+orchestrator:
+  maintenance_schedule: "02:00"
+  health_check_interval_sec: 10
+  max_consecutive_failures: 3
+  mode_transition_timeout_sec: 30
