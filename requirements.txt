@@ -1,0 +1,20 @@
+# RKNN Runtime — install from airockchip/rknn-toolkit2 wheels
+# rknn-toolkit-lite2: https://github.com/airockchip/rknn-toolkit2/tree/master/rknn-toolkit-lite2/packages
+# rknn-toolkit2 (host, for conversion): https://github.com/airockchip/rknn-toolkit2/tree/master/rknn-toolkit2/packages
+
+torch>=2.1.0
+torchvision>=0.16.0
+ultralytics>=8.0.200
+onnx>=1.14.0
+onnxruntime>=1.16.0
+opencv-python-headless>=4.8.0
+numpy>=1.24.0
+scipy>=1.11.0
+scikit-learn>=1.3.0
+Pillow>=10.0.0
+pyyaml>=6.0
+tqdm>=4.65.0
+psutil>=5.9.0
+requests>=2.31.0
+schedule>=1.2.0
+peft>=0.6.0
