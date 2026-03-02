@@ -1,0 +1,40 @@
+[Unit]
+Description=Edge-Learner: Production Edge AI Self-Learning Pipeline
+Documentation=https://github.com/akhil-0201/edge-learner
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=edge-learner
+Group=edge-learner
+WorkingDirectory=/opt/edge-learner
+ExecStart=/opt/edge-learner/venv/bin/python /opt/edge-learner/main.py
+Restart=on-failure
+RestartSec=10s
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=edge-learner
+
+# Environment
+EnvironmentFile=-/opt/edge-learner/.env
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONPATH=/opt/edge-learner
+
+# Resource limits
+LimitNOFILE=65536
+LimitNPROC=4096
+TimeoutStartSec=60
+TimeoutStopSec=30
+
+# Hardening
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/edge-learner/buffer
+ReadWritePaths=/opt/edge-learner/exports
+ReadWritePaths=/opt/edge-learner/logs
+ReadWritePaths=/opt/edge-learner/training_data
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
