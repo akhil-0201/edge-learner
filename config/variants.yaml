@@ -1,0 +1,21 @@
+variants:
+  - id: variant_001
+    name: "Panel Type A"
+    lora_checkpoint: /models/lora/variant_001.pt
+    replay_budget: 100
+    accuracy_baseline: 0.94
+    class_weights: { defect_a: 1.0, defect_b: 1.2, clean: 1.0 }
+
+  - id: variant_002
+    name: "Panel Type B"
+    lora_checkpoint: /models/lora/variant_002.pt
+    replay_budget: 100
+    accuracy_baseline: 0.93
+    class_weights: { defect_a: 1.0, defect_b: 1.0, clean: 1.0 }
+
+  - id: variant_003
+    name: "Panel Type C"
+    lora_checkpoint: /models/lora/variant_003.pt
+    replay_budget: 100
+    accuracy_baseline: 0.92
+    class_weights: { defect_a: 1.3, defect_b: 1.0, clean: 1.0 }
